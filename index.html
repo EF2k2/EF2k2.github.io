@@ -5,42 +5,97 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Feliz Cumpleaños</title>
     <link rel="stylesheet" href="estilos.css">
-    <script src="confeti.js"></script>
+    <script src="fireworks-js-master/fireworks.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/animejs"></script>
+    <script src="confeti.js" defer></script>
+    <style>
+        /* ... (otros estilos) ... */
+
+        #mensaje-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+
+        .mensaje {
+            font-size: 2em; /* Ajusta el tamaño del mensaje */
+            color: #FF66B2; /* Ajusta el color inicial del mensaje */
+            opacity: 0; /* Inicialmente invisible */
+            animation: appearFromTop 2s forwards; /* Animación de aparición desde arriba */
+        }
+
+        @keyframes appearFromTop {
+            from {
+                opacity: 0;
+                transform: translateY(-100%);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
 </head>
 <body>
 
     <div class="fondo-con-diseno">
         <div class="centrado">
             <div id="mensaje-container">
-                <h1 id="mensaje1">¡Feliz Cumpleaños!</h1>
-                <p id="mensaje2">Te quiero mucho</p>
-                <p id="mensaje3">Que este año te traiga mucha felicidad, éxitos y momentos especiales. ¡Disfruta tu día al máximo!</p>
+                <h1 id="mensaje1" class="mensaje">¡Feliz Cumpleaños!</h1>
+                <p id="mensaje2" class="mensaje">Te quiero mucho</p>
+                <p id="mensaje3" class="mensaje">Que este año te traiga mucha felicidad, éxitos y momentos especiales. ¡Disfruta tu día al máximo!</p>
             </div>
         </div>
     </div>
 
-    <audio id="audio" autoplay loop >
+    <audio id="audio" autoplay loop>
         <source src="musica_fondo.mp3" type="audio/mp3">
         Tu navegador no soporta la etiqueta de audio.
     </audio>
-    
-    <script src="confeti.js"></script>
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
 
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            particlesJS('particles-js', {
-                particles: { /* Configuración de partículas.js */ },
-                interactivity: { /* Configuración de interactividad de partículas.js */ }
-            });
+    <!-- Contenedor para los fuegos artificiales -->
+    <div id="fireworks-container"></div>
 
-            // Lanzar el confeti automáticamente
-            startConfetti();
-        });
-    </script>
- 
 </body>
+<script>
+// Añade la referencia a anime.js
+var scriptAnime = document.createElement('script');
+scriptAnime.src = 'https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js';
+document.head.appendChild(scriptAnime);
+
+// Espera a que anime.js se cargue antes de ejecutar el código
+scriptAnime.onload = function() {
+    // Coloca el código de confeti, burbujas y mensajes aquí
+    (function() {
+        function getRandomColor() {
+            var colors = ["#FF66B2", "#66CCFF", "#FFD700", "#FF8C00", "#FF1493", "#8A2BE2"];
+            var idx = Math.floor(colors.length * Math.random());
+            return colors[idx];
+        }
+
+        // Añade la clase "mensaje" a todos los mensajes
+        var mensajes = document.querySelectorAll('.mensaje');
+        mensajes.forEach(function(mensaje, index) {
+            // Aplica estilos iniciales
+            mensaje.style.color = getRandomColor();
+        });
+    })();
+};
+</script>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
 
 
