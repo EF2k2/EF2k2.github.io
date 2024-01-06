@@ -5,10 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Feliz Cumpleaños</title>
     <link rel="stylesheet" href="estilos.css">
+    <script src="confeti.js"></script>
 </head>
 <body>
 
-    <div id="particles-js" class="fondo-con-diseno">
+    <div class="bubble">
+        <svg class="heart" viewBox="0 0 600 500">
+            <path d="M300,150 C500,10 600,300 300,400 C0,300 100,10 300,150"/>
+        </svg>
+        <div class="bubble-dummy"></div>
+    </div>
+
+    <div class="fondo-con-diseno">
         <div class="centrado">
             <div id="mensaje-container">
                 <h1 id="mensaje1">¡Feliz Cumpleaños!</h1>
@@ -18,28 +26,28 @@
         </div>
     </div>
 
-    <div class="confeti-container"></div>
-
-    <audio id="audio" loop>
+    <audio id="audio" autoplay loop >
         <source src="musica_fondo.mp3" type="audio/mp3">
         Tu navegador no soporta la etiqueta de audio.
     </audio>
     
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script src="confeti.js"></script>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Función para iniciar la reproducción de la música
-            function iniciarMusica() {
-                document.getElementById('audio').play();
-                // Remover el evento de clic después de iniciada la música
-                document.body.removeEventListener('click', iniciarMusica);
-            }
+            particlesJS('particles-js', {
+                particles: { /* Configuración de partículas.js */ },
+                interactivity: { /* Configuración de interactividad de partículas.js */ }
+            });
 
-            // Agregar un evento de clic a document.body para iniciar la música
-            document.body.addEventListener('click', iniciarMusica);
+            // Lanzar el confeti automáticamente
+            startConfetti();
         });
     </script>
+ 
 </body>
 </html>
+
 
