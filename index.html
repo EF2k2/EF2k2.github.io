@@ -20,7 +20,7 @@
 
     <div class="confeti-container"></div>
 
-    <audio id="audio" autoplay loop>
+    <audio id="audio" loop>
         <source src="musica_fondo.mp3" type="audio/mp3">
         Tu navegador no soporta la etiqueta de audio.
     </audio>
@@ -29,12 +29,17 @@
     <script src="confeti.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Iniciar la reproducción de la música automáticamente
-            document.getElementById('audio').play();
+            // Función para iniciar la reproducción de la música
+            function iniciarMusica() {
+                document.getElementById('audio').play();
+                // Remover el evento de clic después de iniciada la música
+                document.body.removeEventListener('click', iniciarMusica);
+            }
+
+            // Agregar un evento de clic a document.body para iniciar la música
+            document.body.addEventListener('click', iniciarMusica);
         });
-</script>
-
-
+    </script>
 </body>
 </html>
 
