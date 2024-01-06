@@ -48,9 +48,8 @@ body {
     border-radius: 50%;
   }
   
-  
   .bubble-dummy {
-    content: "";
+    content:"" ;
     position: absolute;
     top: 0;
     right: 0;
@@ -58,8 +57,9 @@ body {
     left: 0;
     border-radius: inherit;
     border: .2em solid currentColor;
-    /**animation: bubbleUp 1200ms ease-out forwards;**/
-  }
+    
+ }
+ 
   
   @keyframes bubbleUp {
       from {
@@ -114,4 +114,24 @@ body {
     color: #FFD700;
     font-size: 2.5em; /* Ajusta el tamaño del tercer mensaje */
     margin-top: 0;
+}
+#fireworks-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none; /* Evita que los fuegos artificiales interfieran con la interacción del usuario */
+}
+.message {
+  position: fixed;
+  top: -100px; /* La posición inicial fuera de la pantalla */
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 15px;
+  background-color: #3498db;
+  color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  white-space: nowrap;
 }
