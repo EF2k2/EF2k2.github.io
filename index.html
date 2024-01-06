@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feliz Cumpleaños</title>
+    <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+
+    <div id="particles-js" class="fondo-con-diseno">
+        <div class="centrado">
+            <div id="mensaje-container">
+                <h1 id="mensaje1">¡Feliz Cumpleaños!</h1>
+                <p id="mensaje2">Te quiero mucho</p>
+                <p id="mensaje3">Que este año te traiga mucha felicidad, éxitos y momentos especiales. ¡Disfruta tu día al máximo!</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="confeti-container"></div>
+
+    <audio id="audio" autoplay loop>
+        <source src="musica_fondo.mp3" type="audio/mp3">
+        Tu navegador no soporta la etiqueta de audio.
+    </audio>
+    
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="confeti.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Iniciar la reproducción de la música automáticamente
+            document.getElementById('audio').play();
+        });
+</script>
+
+
+</body>
+</html>
+
