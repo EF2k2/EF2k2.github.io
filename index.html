@@ -1,424 +1,247 @@
 <!DOCTYPE html>
-
 <html lang="es">
-
 <head>
-
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Feliz Cumpleaños</title>
-
     <link rel="stylesheet" href="estilos.css">
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
-
     <style>
-
         body {
-
             font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-
             overflow: hidden;
-
             margin: 0;
-
             background-color: #000; /* Fondo negro */
-
             color: #fff; /* Texto blanco */
-
         }
-
-
 
         /* Estilo para el mensaje inicial "Juana" */
-
         #juana-container {
-
             position: absolute;
-
             top: 50%;
-
             left: 50%;
-
             transform: translate(-50%, -50%);
-
             z-index: 10;
-
         }
-
-
 
         #juana {
-
             font-size: 7em;
-
             color: #FFD700;
-
             opacity: 1;
-
             animation: fadeOut 3s ease forwards;
-
         }
 
+        /* Mensaje "¡Bienvenida al club!" */
+        #club-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 9;
+            opacity: 0;
+            animation: fadeInOut 3s ease forwards;
+            animation-delay: 3s; /* Aparece después de que desaparece "Juana" */
+        }
 
+        #club {
+            font-size: 5em;
+            color: #66CCFF;
+        }
 
         @keyframes fadeOut {
-
             0% {
-
                 opacity: 1;
-
             }
-
             100% {
-
                 opacity: 0;
-
             }
-
         }
 
-
+        @keyframes fadeInOut {
+            0% {
+                opacity: 0;
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+            }
+        }
 
         /* Contenedor para el mensaje principal */
-
         #mensaje-container {
-
             position: absolute;
-
             top: 50%;
-
             left: 50%;
-
             transform: translate(-50%, -50%);
-
             text-align: center;
-
             z-index: 2;
-
             opacity: 0; /* Comienza invisible */
-
             animation: showText 1s ease forwards;
-
-            animation-delay: 3s; /* Aparece después de 3 segundos */
-
+            animation-delay: 6s; /* Aparece después de "¡Bienvenida al club!" */
         }
-
-
 
         @keyframes showText {
-
             to {
-
                 opacity: 1;
-
             }
-
         }
-
-
 
         #mensaje1, #mensaje2, #mensaje3 {
-
             opacity: 0;
-
             animation: slideDown 2s ease forwards;
-
-            animation-delay: 3s; /* Empieza después de que desaparece "Juana" */
-
+            animation-delay: 6s; /* Empieza después de que desaparece "¡Bienvenida al club!" */
         }
-
-
 
         #mensaje1 {
-
             color: #FF66B2;
-
             font-size: 5em;
-
             margin-top: 0;
-
-            animation-delay: 3.5s;
-
+            animation-delay: 6.5s;
         }
-
-
 
         #mensaje2 {
-
             color: #66CCFF;
-
             font-size: 3em;
-
             margin-top: 0;
-
-            animation-delay: 4s;
-
+            animation-delay: 7s;
         }
-
-
 
         #mensaje3 {
-
             color: #FFD700;
-
             font-size: 2.5em;
-
             margin-top: 0;
-
-            animation-delay: 4.5s;
-
+            animation-delay: 7.5s;
         }
-
-
 
         @keyframes slideDown {
-
             0% {
-
                 opacity: 0;
-
                 transform: translateY(-50px);
-
             }
-
             100% {
-
                 opacity: 1;
-
                 transform: translateY(0);
-
             }
-
         }
-
-
 
         #fireworks-container {
-
             position: fixed;
-
             top: 0;
-
             left: 0;
-
             width: 100%;
-
             height: 100%;
-
             pointer-events: none;
-
         }
-
     </style>
-
 </head>
-
 <body>
 
-
-
     <!-- Mensaje inicial "Juana" -->
-
     <div id="juana-container">
-
         <h1 id="juana">¡Juana!</h1>
-
     </div>
 
-
+    <!-- Mensaje "¡Bienvenida al club!" -->
+    <div id="club-container">
+        <h1 id="club">¡Bienvenida al club!</h1>
+    </div>
 
     <!-- Mensaje principal -->
-
     <div id="mensaje-container">
-
         <h1 id="mensaje1" class="mensaje">¡Feliz Cumpleaños!</h1>
-
         <p id="mensaje2" class="mensaje">Te quiero mucho</p>
-
-        <p id="mensaje3" class="mensaje">Que este año te traiga mucha felicidad, éxitos y momentos especiales. </p>
-
+        <p id="mensaje3" class="mensaje">Que este año te traiga mucha felicidad, éxitos y momentos especiales.</p>
         <p id="mensaje3" class="mensaje">¡Disfruta tu día al máximo!</p>
-
     </div>
 
-
-
     <audio id="audio" autoplay loop>
-
         <source src="musica_fondo.mp3" type="audio/mp3">
-
         Tu navegador no soporta la etiqueta de audio.
-
     </audio>
-
-
 
     <div id="fireworks-container"></div>
 
-
-
     <script>
-
         document.addEventListener('DOMContentLoaded', function() {
-
             function getRandomColor() {
-
                 var colors = ["#FF66B2", "#66CCFF", "#FFD700", "#FF8C00", "#FF1493", "#8A2BE2"];
-
                 var idx = Math.floor(colors.length * Math.random());
-
                 return colors[idx];
-
             }
-
-
 
             function createConfettiPiece() {
-
                 return {
-
                     x: Math.random() * window.innerWidth,
-
                     y: Math.random() * window.innerHeight, // Inicia en cualquier punto vertical
-
                     size: (Math.random() * 5) + 2,
-
                     color: getRandomColor(),
-
                     tilt: Math.floor(Math.random() * 360),
-
                     tiltAngleIncremental: (Math.random() * 0.1) + 0.05,
-
                     tiltAngle: 0,
-
                     gravity: 0.02, // Gravedad reducida
-
                     velocity: {
-
                         x: (Math.random() * 2) - 1, // Velocidad horizontal
-
                         y: (Math.random() * 2) + 1 // Velocidad vertical
-
                     }
-
                 };
-
             }
 
-
-
             function animateConfetti() {
-
                 var canvas = document.createElement('canvas');
-
                 document.body.appendChild(canvas);
-
                 var ctx = canvas.getContext('2d');
-
                 canvas.width = window.innerWidth;
-
                 canvas.height = window.innerHeight;
 
-
-
                 var confettiPieces = [];
-
                 var numConfetti = 100;
 
-
-
                 for (var i = 0; i < numConfetti; i++) {
-
                     confettiPieces.push(createConfettiPiece());
-
                 }
 
-
-
                 function drawConfetti() {
-
                     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-
-
                     confettiPieces.forEach(function(confetti) {
-
                         confetti.x += confetti.velocity.x;
-
                         confetti.y += confetti.velocity.y;
-
-
 
                         confetti.velocity.y += confetti.gravity;
 
-
-
                         ctx.fillStyle = confetti.color;
-
                         ctx.beginPath();
-
                         ctx.lineWidth = confetti.size;
-
                         ctx.strokeStyle = confetti.color;
-
                         ctx.moveTo(confetti.x + (confetti.size * Math.cos(confetti.tiltAngle - 45)), confetti.y + (confetti.size * Math.sin(confetti.tiltAngle - 45)));
-
                         ctx.lineTo(confetti.x - (confetti.size * Math.cos(confetti.tiltAngle + 45)), confetti.y + (confetti.size * Math.sin(confetti.tiltAngle + 45)));
-
                         ctx.stroke();
 
-
-
                         if (confetti.y >= canvas.height) {
-
                             confetti.y = -confetti.size; // Reinicia la posición vertical
-
                             confetti.x = Math.random() * canvas.width; // Reposiciona horizontalmente
-
                             confetti.velocity.y = (Math.random() * 2) + 1; // Reajusta la velocidad vertical
-
                         }
-
                     });
 
-
-
                     requestAnimationFrame(drawConfetti);
-
                 }
 
-
-
                 drawConfetti();
-
             }
 
-
-
             // Confeti adicional al mostrar el mensaje
-
             var mensajeContainer = document.getElementById('mensaje-container');
-
             mensajeContainer.addEventListener('animationstart', function() {
-
                 animateConfetti();
-
             });
 
-
-
             // Inicializa el confeti al cargar la página
-
             animateConfetti();
-
         });
-
     </script>
-
 </body>
-
 </html>
 
