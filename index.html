@@ -88,7 +88,7 @@
             }
         }
 
-        #mensaje1, #mensaje2, #mensaje3 {
+        #mensaje1, #mensaje2, #mensaje3, #mensaje4 {
             opacity: 0;
             animation: slideDown 2s ease forwards;
             animation-delay: 6s; /* Empieza después de que desaparece "¡Bienvenida al club!" */
@@ -113,6 +113,13 @@
             font-size: 2.5em;
             margin-top: 0;
             animation-delay: 7.5s;
+        }
+
+        #mensaje4 {
+            color: #FF8C00;
+            font-size: 2.5em;
+            margin-top: 0;
+            animation-delay: 8s; /* Aparece un poco después del mensaje 3 */
         }
 
         @keyframes slideDown {
@@ -152,9 +159,9 @@
     <div id="mensaje-container">
         <h1 id="mensaje1" class="mensaje">¡Feliz Cumpleaños!</h1>
         <p id="mensaje2" class="mensaje">Te quiero mucho</p>
-        <p id="mensaje3" class="mensaje">Que este año te traiga mucha felicidad, éxitos y momentos especiales.</p>
+        <p id="mensaje3" class="mensaje">Hoy se celebra otro año en tu vida, y no podía perder la oportunidad para recordarte que eres especial. Tu creatividad, tu fortaleza y tu autenticidad iluminan la vida de quienes te rodean.</p>
         <p id="mensaje3" class="mensaje">¡Disfruta tu día al máximo!</p>
-    </div>
+        
 
     <audio id="audio" autoplay loop>
         <source src="musica_fondo.mp3" type="audio/mp3">
@@ -244,4 +251,3 @@
     </script>
 </body>
 </html>
-
